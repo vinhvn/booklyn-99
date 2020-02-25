@@ -8,7 +8,7 @@ An online bookstore application ("LookInnaBook"), designed and implemented for C
   - [Features](#features)
   - [Work in Progress](#work-in-progress)
   - [Useful Resources](#useful-resources)
-    - [Specifications](#specifications)
+    - [Project Information](#project-information)
     - [Book Data](#book-data)
 
 ## Installation
@@ -21,9 +21,10 @@ An online bookstore application ("LookInnaBook"), designed and implemented for C
 
 ## Useful Resources
 
-### Specifications
+### Project Information
 
-- [COMP 3005 project specifications](resources/Project_COMP_3005_W20.pdf)
+- [COMP 3005 Project Specifications](resources/Project_COMP_3005_W20.pdf)
+- [Project Report](resources/report/)
 
 ### Book Data
 

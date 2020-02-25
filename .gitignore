@@ -1,3 +1,10 @@
+# Files personal to the project
+*.aux
+*.fdb_latexmk
+*.fls
+*.gz
+database/
+
 # Logs
 logs
 *.log
