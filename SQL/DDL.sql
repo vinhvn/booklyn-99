@@ -15,7 +15,7 @@ CREATE TABLE book (
   genre varchar(50),
   publisher_percentage numeric(0, 2) DEFAULT.02,
   PRIMARY KEY(publisher_id, isbn),
-  FOREIGN KEY (publisher_id) REFERENCES publisher(publisher_id)
+  FOREIGN KEY (publisher_id) REFERENCES publisher
 );
 -- RELATION: publisher
 CREATE TABLE publisher (
@@ -67,7 +67,7 @@ CREATE TABLE store (
   username varchar(30),
   store_name varchar(50),
   PRIMARY KEY(username, store_name),
-  FOREIGN KEY (username) REFERENCES user (username)
+  FOREIGN KEY (username) REFERENCES user
 );
 -- RELATIONSHIP: store_books
 CREATE TABLE store_books (
@@ -78,8 +78,8 @@ CREATE TABLE store_books (
   stock_quantity numeric(4, 0) CHECK (stock_quantity > warning_quantity),
   warning_quantity numeric(4, 0) CHECK (warning_quantity >= 0),
   PRIMARY KEY(store_name, isbn),
-  FOREIGN KEY (username) REFERENCES user (username),
-  FOREIGN KEY (isbn) REFERENCES book (isbn)
+  FOREIGN KEY (username) REFERENCES user,
+  FOREIGN KEY (isbn) REFERENCES book
 );
 -- RELATIONSHIP: ordered
 CREATE TABLE ordered (
@@ -88,8 +88,8 @@ CREATE TABLE ordered (
   username varchar(30),
   quantity numeric(3, 0) CHECK (quantity > 0),
   PRIMARY KEY (order_id, isbn),
-  FOREIGN KEY order_id REFERENCES order (order_id),
-  FOREIGN KEY isbn REFERENCES book (isbn),
-  FOREIGN KEY username REFERENCES user (username)
+  FOREIGN KEY order_id REFERENCES order,
+  FOREIGN KEY isbn REFERENCES book,
+  FOREIGN KEY username REFERENCES user
 );
 -- All other relationships are trivial
