@@ -24,3 +24,4 @@ An online bookstore application ("LookInnaBook"), designed and implemented for C
 
 - [COMP 3005 Project Specifications](resources/Project_COMP_3005_W20.pdf)
 - [Project Report](resources/report/)
+- [ER Diagram](resources/er-diagram_current.png)
