@@ -11,28 +11,6 @@ CREATE DATABASE `bookstore` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ------------------------------------------------------------- RELATIONS
 
 */
--- RELATION: Book
-CREATE TABLE book (
-  isbn numeric(13, 0),
-  publisher_id numeric(5, 0),
-  title varchar(100) NOT NULL,
-  author varchar(50) NOT NULL,
-  genre varchar(50),
-  pub_percentage numeric(0, 2) DEFAULT 0.02,
-  PRIMARY KEY (isbn, publisher_id),
-  FOREIGN KEY (publisher_id) REFERENCES publisher (id)
-);
--- RELATION: publisher
-CREATE TABLE publisher (
-  id numeric(5, 0),
-  name varchar(50),
-  banking_account varchar(20) NOT NULL,
-  address_id numeric(5, 0),
-  email varchar(100),
-  phone_number numeric(10, 0),
-  PRIMARY KEY (id),
-  FOREIGN KEY (address_id) REFERENCES address (id)
-);
 -- RELATION: address
 CREATE TABLE address (
   id numeric(5, 0),
@@ -43,8 +21,38 @@ CREATE TABLE address (
   postal_code varchar(6),
   PRIMARY KEY (id)
 );
--- RELATION: order
-CREATE TABLE order (
+-- RELATION: publisher
+CREATE TABLE publisher (
+  id numeric(5, 0),
+  publisher_name varchar(50),
+  banking_account varchar(20) NOT NULL,
+  address_id numeric(5, 0),
+  email varchar(100),
+  phone_number numeric(10, 0),
+  PRIMARY KEY (id),
+  FOREIGN KEY (address_id) REFERENCES address (id)
+);
+-- RELATION: Book
+CREATE TABLE book (
+  isbn numeric(13, 0),
+  publisher_id numeric(5, 0) NOT NULL,
+  title varchar(100) NOT NULL,
+  author varchar(50) NOT NULL,
+  genre varchar(50),
+  pub_percentage numeric(3, 2) DEFAULT 0.02,
+  PRIMARY KEY (isbn),
+  FOREIGN KEY (publisher_id) REFERENCES publisher (id)
+);
+
+CREATE TABLE published (
+    isbn numeric(13, 0) NOT NULL,
+    publisher_id numeric(5, 0) NOT NULL,
+    PRIMARY KEY (isbn, publisher_id),
+    FOREIGN KEY(isbn) REFERENCES book (isbn),
+    FOREIGN KEY(publisher_id) REFERENCES publisher (id)
+);
+-- RELATION: "order"
+CREATE TABLE "order" (
   id numeric(8, 0) NOT NULL,
   date timestamp,
   tracking_number varchar(24),
@@ -56,8 +64,8 @@ CREATE TABLE order (
   FOREIGN KEY (billing_address) REFERENCES address (id),
   FOREIGN KEY (shipping_address) REFERENCES address (id)
 );
--- RELATION: user
-CREATE TABLE user (
+-- RELATION: "user"
+CREATE TABLE "user" (
   username varchar(30),
   password varchar(30) NOT NULL,
   first_name varchar(25),
@@ -75,10 +83,10 @@ CREATE TABLE user (
 );
 -- RELATION: store
 CREATE TABLE store (
-  name varchar(50),
+  store_name varchar(50),
   username varchar(30),
-  PRIMARY KEY(name, username),
-  FOREIGN KEY (username) REFERENCES user
+  PRIMARY KEY(store_name),
+  FOREIGN KEY (username) REFERENCES "user" (username)
 );
 /*
 
@@ -94,16 +102,16 @@ CREATE TABLE store_books (
   stock_quantity numeric(4, 0) CHECK (stock_quantity > warning_quantity),
   warning_quantity numeric(4, 0) CHECK (warning_quantity >= 0),
   PRIMARY KEY(store_name, isbn),
-  FOREIGN KEY (store_name) REFERENCES store (name),
-  FOREIGN KEY (isbn) REFERENCES book
+  FOREIGN KEY (store_name) REFERENCES store (store_name),
+  FOREIGN KEY (isbn) REFERENCES book (isbn)
 );
 -- RELATIONSHIP: ordered
 CREATE TABLE ordered (
   order_id numeric(8, 0),
   username varchar(30),
   PRIMARY KEY (order_id),
-  FOREIGN KEY order_id REFERENCES order (id),
-  FOREIGN KEY username REFERENCES user
+  FOREIGN KEY (order_id) REFERENCES "order" (id),
+  FOREIGN KEY (username) REFERENCES "user" (username)
 );
 -- RELATIONSHIP: order_book
 CREATE TABLE order_book (
@@ -111,7 +119,7 @@ CREATE TABLE order_book (
   isbn numeric(13, 0),
   quantity numeric(3, 0) CHECK (quantity > 0),
   PRIMARY KEY (order_id, isbn),
-  FOREIGN KEY order_id REFERENCES order (id),
-  FOREIGN KEY isbn REFERENCES book,
+  FOREIGN KEY (order_id) REFERENCES "order" (id),
+  FOREIGN KEY (isbn) REFERENCES book (isbn)
 );
 -- All other relationships are implied
