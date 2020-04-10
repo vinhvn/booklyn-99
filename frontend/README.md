@@ -1,6 +1,6 @@
 # Client
 
-Bootstrapped with [Next.js's Express Example](https://github.com/zeit/next.js/blob/canary/examples/custom-server-express/)
+Bootstrapped with [Express Application Generator](https://expressjs.com/en/starter/generator.html)
 
 ## Getting Started
 
