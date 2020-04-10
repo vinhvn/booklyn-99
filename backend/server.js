@@ -26,6 +26,9 @@ function queryGenerator(table, params) {
         publisher = params.publisher
         delete params.publisher
     }
+    if("isbn" in params){
+        return "SELECT * FROM book WHERE isbn = " + params.isbn;
+    }
     let keys = Object.keys(params)
     let values = Object.values(params)
     console.log(params)
@@ -58,7 +61,7 @@ function queryGenerator(table, params) {
     return query // return our final query
 }
 
-app.get('/', (req, res) => {
+app.get('/books', (req, res) => {
     let query = queryGenerator("book", req.query)
     //client.connect()
     client.query(query, (error, results) => {

@@ -1,10 +1,11 @@
---user
-INSERT INTO user (username, password, email)
-VALUES('Nick', 'covid19', 'nickkerr@gmail.com');
-
 --address
 INSERT INTO address
 VALUES(1, 2939, 'Books Avenue', 'Booklyn', 'New Bork City', 'B00K');
+
+--user
+INSERT INTO "user" (username, password, email)
+VALUES('Nick', 'covid19', 'nickkerr@gmail.com');
+
 --publishers
 INSERT INTO publisher
 VALUES(1, 'Books R Us', '420', 1, 'booksrus@aol.com', '7184208008');
