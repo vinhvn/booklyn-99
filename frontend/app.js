@@ -4,7 +4,7 @@ const path = require('path');
 const session = require('express-session');
 // Routers
 const indexRouter = require('./routes/index');
-const booksRouter = require('./routes/books');
+const searchRouter = require('./routes/search');
 
 const app = express();
 
@@ -25,9 +25,19 @@ app.use(
 
 // Routes
 app.use('/', indexRouter);
-app.use('/books', booksRouter);
+app.use('/search', searchRouter);
 
-// Catch all other requests as 404s
+// Error handler
+app.use(function (err, req, res, next) {
+    console.log(err.stack);
+    res.status(err.status).render(path.join('pages', 'error'), {
+        status: err.status,
+        message: err.message,
+        session: req.session,
+    });
+});
+
+// Catch all other routes as 404s
 app.all('*', (req, res, next) => {
     res.status(404).render('pages/error', {
         status: '404',

@@ -1,11 +1,12 @@
 doctype html
 html
   head
-    title= title
+    title Booklyn 99
     link(rel='stylesheet', href='/css/bootstrap.css')
     link(rel='stylesheet', href='/css/app.css')
   body
-    div(class='container')
+    include nav
+    div(class='container-fluid')
       block content
-    script(src='/js/jquery-3.5.0.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='/js/bootstrap.js')

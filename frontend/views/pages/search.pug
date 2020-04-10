@@ -1,0 +1,21 @@
+extends ../includes/layout
+
+block content
+    h1 Search
+    form(action='/books')
+        div(class='form-group')
+            label(for='title') TITLE
+            input(class='form-control' id='title' name='title')
+        div(class='form-group')
+            label(for='author') AUTHOR
+            input(class='form-control' id='author' name='author')
+        div(class='form-group')
+            label(for='genre') GENRE
+            select(class='form-control' id='genre' name='genre')
+                option
+                each opt in genre
+                    option #{opt}
+        div(class='form-group')
+            label(for='isbn') ISBN
+            input(class='form-control' id='isbn' name='isbn' placeholder='1234567890123')
+        button(type='submit' class='btn btn-dark') Submit
