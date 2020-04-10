@@ -97,8 +97,8 @@ CREATE TABLE store (
 CREATE TABLE store_books (
   store_name varchar(50),
   isbn numeric(13, 0),
-  retail_price numeric(3, 2) CHECK (retail_price > 0),
-  wholesale_price numeric(3, 2) CHECK (wholesale_price > 0),
+  retail_price numeric(5, 2) CHECK (retail_price > 0),
+  wholesale_price numeric(5, 2) CHECK (wholesale_price > 0),
   stock_quantity numeric(4, 0) CHECK (stock_quantity > warning_quantity),
   warning_quantity numeric(4, 0) CHECK (warning_quantity >= 0),
   PRIMARY KEY(store_name, isbn),
