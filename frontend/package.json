@@ -1,28 +1,18 @@
 {
-  "name": "client",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js"
-  },
-  "dependencies": {
-    "cross-env": "^5.2.0",
-    "express": "^4.14.0",
-    "next": "latest",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
-  },
-  "description": "Most of the times the default Next server will be enough but sometimes you want to run your own server to customize routes or other kind of the app behavior. Next provides a [Custom server and routing](https://github.com/zeit/next.js#custom-server-and-routing) so you can customize as much as you want.",
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vinhvn/online-bookstore.git"
-  },
-  "author": "Vinh Nguyen",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vinhvn/online-bookstore/issues"
-  },
-  "homepage": "https://github.com/vinhvn/online-bookstore#readme"
+    "name": "backend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "dev": "nodemon ./bin/www"
+    },
+    "dependencies": {
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "express": "~4.16.1",
+        "express-session": "^1.17.0",
+        "node-fetch": "^2.6.0",
+        "prettier": "^2.0.4",
+        "pug": "^2.0.4"
+    }
 }
