@@ -6,7 +6,7 @@ const port = 8081
 const { Client } = require('pg')
 const client = new Client({
     user: 'postgres',
-    password: 'xxxxxx',
+    password: '20000205',
     host: 'localhost',
     database: 'bookstore',
     port: 5432
@@ -93,10 +93,12 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
-    if(!(req.query.authkey in authed)) { // check if logged in
+    console.log(authed)
+    console.log(req.query.authkey)
+    if(!authed.includes(req.query.authkey)) { // check if logged in
         res.json({status:400})
     } else {
-        authed.remove(req.query.authkey)
+        authed.splice(authed.indexOf(req.query.authkey), 1)
         res.json({status:200})
     }
 })
