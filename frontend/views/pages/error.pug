@@ -1,5 +1,6 @@
 extends ../includes/layout
 
 block content
-  h1= status
-  h2= message
+  div(class='container-fluid')
+    h1 Error
+    h2 #{status}: #{message}

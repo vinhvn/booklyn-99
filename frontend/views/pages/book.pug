@@ -1,0 +1,19 @@
+extends ../includes/layout
+
+block content
+    div(class='container-fluid')
+        h1
+            span(class='badge badge-primary') Book
+            |  
+            | #{title}
+        div(class='card' style='width: 24rem;')
+            img(src='/images/stock-book.jpg' class='card-img-top' alt='stock-book')
+            div(class='card-body')
+                h5(class='card-title') #{title}
+                p(class='card-text')
+                    | Author: #{author}
+                    br
+                    | Genre: #{genre}
+                    br
+                    | ISBN: #{isbn}
+                a(href=`/book/${isbn}` class='btn btn-primary') Buy

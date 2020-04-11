@@ -1,0 +1,34 @@
+extends ../includes/layout
+
+block content
+    div(class='container-fluid')
+        h1 Register
+        form(action='/register' method='post')
+            div(class='form-group')
+                label(for='username') Username
+                input(class='form-control' id='username' name='username' placeholder='Username')
+            div(class='form-group')
+                label(for='password') Password
+                input(type='password' class='form-control' id='password' name='password' placeholder='********')
+            div(class='form-group')
+                label(for='first_name') First Name
+                input(class='form-control' id='first_name' name='first_name' placeholder='Daymond')
+            div(class='form-group')
+                label(for='last_name') Last Name
+                input(class='form-control' id='last_name' name='last_name' placeholder='Bolt')
+            div(class='form-group')
+                label(for='email') Email
+                input(class='form-control' id='email' name='email' placeholder='daymond.bolt@booklyn99.com')
+            div(class='form-group')
+                label(for='phone_number') Phone Number
+                input(class='form-control' id='phone_number' name='phone_number' placeholder='6466105000')
+            div(class='form-group')
+                label(for='gender') Gender
+                select(class='form-control' id='gender' name='gender')
+                    option(value='m') Male
+                    option(value='f') Female
+                    option(value='o') Other
+            div(class='form-group')
+                label(for='age') Age
+                input(class='form-control' id='age' name='age' placeholder='57')
+            button(type='submit' class='btn btn-primary') Register
