@@ -1,0 +1,26 @@
+extends ../includes/layout
+
+block content
+    div(class='container-fluid')
+        h1 Search
+        form(action='/books' method='get')
+            div(class='form-group')
+                label(for='title') TITLE
+                input(class='form-control' id='title' name='title' placeholder='Title')
+            div(class='form-group')
+                label(for='author') AUTHOR
+                input(class='form-control' id='author' name='author' placeholder='Author')
+            div(class='form-group')
+                label(for='genre') GENRE
+                select(class='form-control' id='genre' name='genre' placeholder='Genre')
+                    option
+                    each opt in genre
+                        option #{opt}
+            div(class='form-group')
+                label(for='publisher') PUBLISHER NAME
+                input(class='form-control' id='publisher' name='publisher' placeholder='Publisher')
+            div(class='form-group')
+                label(for='isbn') ISBN
+                input(class='form-control' id='isbn' name='isbn' placeholder='1234567890123')
+                small(id="isbnHelp" class="form-text text-muted") Require all 13 digits
+            button(type='submit' class='btn btn-dark') Submit

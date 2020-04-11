@@ -3,8 +3,13 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 // Routers
-const indexRouter = require('./routes/index');
-const booksRouter = require('./routes/books');
+const indexRouter = require(path.join(__dirname, 'routes', 'index'));
+const searchRouter = require(path.join(__dirname, 'routes', 'search'));
+const booksRouter = require(path.join(__dirname, 'routes', 'books'));
+const bookRouter = require(path.join(__dirname, 'routes', 'book'));
+const registerRouter = require(path.join(__dirname, 'routes', 'register'));
+const loginRouter = require(path.join(__dirname, 'routes', 'login'));
+const logoutRouter = require(path.join(__dirname, 'routes', 'logout'));
 
 const app = express();
 
@@ -25,9 +30,24 @@ app.use(
 
 // Routes
 app.use('/', indexRouter);
+app.use('/search', searchRouter);
 app.use('/books', booksRouter);
+app.use('/book', bookRouter);
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 
-// Catch all other requests as 404s
+// Error handler
+app.use(function (err, req, res, next) {
+    console.log(err.stack);
+    res.status(err.status).render(path.join('pages', 'error'), {
+        status: err.status,
+        message: err.message,
+        session: req.session,
+    });
+});
+
+// Catch all other routes as 404s
 app.all('*', (req, res, next) => {
     res.status(404).render('pages/error', {
         status: '404',
