@@ -1,9 +1,10 @@
-const { uuid } = require("uuidv4");
-const express = require("express");
-const app = express();
-const port = 8081;
+const { uuid } = require('uuidv4')
+const express = require('express')
+const bodyParser = require('body-parser');
+const app = express()
+const port = 8081
 
-const { Client } = require("pg");
+const { Client } = require('pg')
 const client = new Client({
     user: 'postgres',
     password: 'XXXX',
@@ -16,77 +17,47 @@ app.use(express.json())
 let authed = []
 
 function queryGenerator(table, params) {
-  let store;
-  let publisher;
-  if ("store" in params) {
-    store = params.store;
-    delete params.store;
-  }
-  if ("publisher" in params) {
-    publisher = params.publisher;
-    delete params.publisher;
-  }
-  if ("isbn" in params) {
-    return "SELECT * FROM book WHERE isbn = " + params.isbn;
-  }
-  let keys = Object.keys(params);
-  let values = Object.values(params);
-  console.log(params);
-  let query = "SELECT * FROM " + '"' + table + '"'; // initial query string
 
-  let store;
-  let publisher;
-  if("store" in params){
-      store = params.store
-      delete params.store
-  }
-  if("publisher" in params){
-      publisher = params.publisher
-      delete params.publisher
-  }
-  if("isbn" in params){
-      return "SELECT * FROM book WHERE isbn = " + params.isbn;
-  }
-  let keys = Object.keys(params)
-  let values = Object.values(params)
-  console.log(params)
-  let query = "SELECT * FROM " + "\"" + table + "\"" // initial query string
-
-  if (keys.length != 0) { query += " WHERE " } // add if query parameters
-
-  for (let i = 0; i < keys.length; i++) { // loop through params and add them
-      query += "UPPER(" + keys[i] + ") LIKE UPPER(\'%" + encodeURIComponent(values[i]) + "%\') AND "
-  }
-
-  if (keys.length != 0) {
-    query = query.substring(0, query.length - 4);
-  } // remove the additional AND
-
-  if (store) {
-    if (keys.length != 0) {
-      query +=
-        "AND isbn IN (SELECT isbn FROM store_books WHERE UPPER(store_name) LIKE UPPER('%" +
-        store +
-        "%'))";
-    } else {
-      query +=
-        " WHERE isbn IN (SELECT isbn FROM store_books WHERE UPPER(store_name) LIKE UPPER('%" +
-        store +
-        "%'))";
+    let store;
+    let publisher;
+    if("store" in params){
+        store = params.store
+        delete params.store
     }
-  }
+    if("publisher" in params){
+        publisher = params.publisher
+        delete params.publisher
+    }
+    if("isbn" in params){
+        return "SELECT * FROM book WHERE isbn = " + params.isbn;
+    }
+    let keys = Object.keys(params)
+    let values = Object.values(params)
+    console.log(params)
+    let query = "SELECT * FROM " + "\"" + table + "\"" // initial query string
 
-  if (publisher) {
-    if (keys.length != 0) {
-      query +=
-        "AND isbn IN (SELECT isbn FROM published WHERE publisher_id IN (SELECT publisher_id FROM publisher WHERE UPPER(publisher_name) LIKE UPPER('%" +
-        publisher +
-        "%')))";
-    } else {
-      query +=
-        " WHERE isbn IN (SELECT isbn FROM published WHERE publisher_id IN (SELECT publisher_id FROM publisher WHERE UPPER(publisher_name) LIKE UPPER('%" +
-        publisher +
-        "%')))";
+    if (keys.length != 0) { query += " WHERE " } // add if query parameters
+
+    for (let i = 0; i < keys.length; i++) { // loop through params and add them
+        query += "UPPER(" + keys[i] + ") LIKE UPPER(\'%" + encodeURIComponent(values[i]) + "%\') AND "
+    }
+
+    if (keys.length != 0) { query = query.substring(0, query.length - 4) } // remove the additional AND
+
+    if(store) {
+        if(keys.length != 0) {
+            query += "AND isbn IN (SELECT isbn FROM store_books WHERE UPPER(store_name) LIKE UPPER(\'%" + store + "%\'))";
+        } else {
+            query += " WHERE isbn IN (SELECT isbn FROM store_books WHERE UPPER(store_name) LIKE UPPER(\'%" + store + "%\'))";
+        }
+    }
+
+    if(publisher) {
+        if(keys.length != 0) {
+            query += "AND isbn IN (SELECT isbn FROM published WHERE publisher_id IN (SELECT publisher_id FROM publisher WHERE UPPER(publisher_name) LIKE UPPER(\'%" + publisher + "%\')))"
+        } else {
+            query += " WHERE isbn IN (SELECT isbn FROM published WHERE publisher_id IN (SELECT publisher_id FROM publisher WHERE UPPER(publisher_name) LIKE UPPER(\'%" + publisher + "%\')))"
+        }
     }
     return query // return our final query
 }
@@ -134,17 +105,7 @@ app.post('/logout', (req, res) => {
         authed.splice(authed.indexOf(req.body.authkey), 1)
         res.json({status:200})
     }
-    if (valid) {
-      // exists
-      let key = uuid();
-      authed.push(key);
-      res.json({ status: 200, key: key });
-      return;
-    }
-    res.json({ status: 400 });
-    //client.end()
-  });
-});
+})
 
 app.post('/register', (req, res) => {
     let address_id = Math.floor(Math.random() * 99999);
@@ -190,20 +151,6 @@ app.get('/genres', (req, res) => {
     })
 })
 
-app.get("/genres", (req, res) => {
-  let query = "SELECT DISTINCT genre FROM book";
-  //client.connect()
-  client.query(query, (error, results) => {
-    if (error) {
-      throw error;
-    }
-    let sent = { genre: [] };
-    for (var i = 0; i < results.rows.length; i++) {
-      sent.genre.push(results.rows[i].genre);
-    }
-    res.json(sent);
-    //client.end()
-  });
-});
+app.listen(port, () => {
 
-app.listen(port, () => {});
+})
