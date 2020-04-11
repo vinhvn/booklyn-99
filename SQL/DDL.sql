@@ -38,7 +38,6 @@ CREATE TABLE book (
   title varchar(255) NOT NULL,
   author varchar(50) NOT NULL,
   genre varchar(50),
-  pub_percentage numeric(3, 2) DEFAULT 0.02,
   PRIMARY KEY (isbn)
 );
 -- RELATION: "order"
@@ -87,6 +86,7 @@ CREATE TABLE store (
 CREATE TABLE published (
   isbn numeric(13, 0) NOT NULL,
   publisher_id numeric(5, 0) NOT NULL,
+  pub_percentage numeric(3, 2) DEFAULT 0.02,
   PRIMARY KEY (isbn, publisher_id),
   FOREIGN KEY(isbn) REFERENCES book (isbn),
   FOREIGN KEY(publisher_id) REFERENCES publisher (id)
