@@ -32,7 +32,7 @@ CREATE TABLE publisher (
   PRIMARY KEY (id),
   FOREIGN KEY (address_id) REFERENCES address (id)
 );
--- RELATION: Book
+-- RELATION: book
 CREATE TABLE book (
   isbn numeric(13, 0),
   title varchar(255) NOT NULL,
@@ -40,13 +40,6 @@ CREATE TABLE book (
   genre varchar(50),
   pub_percentage numeric(3, 2) DEFAULT 0.02,
   PRIMARY KEY (isbn)
-);
-CREATE TABLE published (
-  isbn numeric(13, 0) NOT NULL,
-  publisher_id numeric(5, 0) NOT NULL,
-  PRIMARY KEY (isbn, publisher_id),
-  FOREIGN KEY(isbn) REFERENCES book (isbn),
-  FOREIGN KEY(publisher_id) REFERENCES publisher (id)
 );
 -- RELATION: "order"
 CREATE TABLE "order" (
@@ -90,6 +83,14 @@ CREATE TABLE store (
 ------------------------------------------------------------- RELATIONSHIPS
 
 */
+-- RELATIONSHIP: published
+CREATE TABLE published (
+  isbn numeric(13, 0) NOT NULL,
+  publisher_id numeric(5, 0) NOT NULL,
+  PRIMARY KEY (isbn, publisher_id),
+  FOREIGN KEY(isbn) REFERENCES book (isbn),
+  FOREIGN KEY(publisher_id) REFERENCES publisher (id)
+);
 -- RELATIONSHIP: store_books
 CREATE TABLE store_books (
   store_name varchar(50),
