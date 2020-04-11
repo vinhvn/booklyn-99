@@ -35,13 +35,11 @@ CREATE TABLE publisher (
 -- RELATION: Book
 CREATE TABLE book (
   isbn numeric(13, 0),
-  publisher_id numeric(5, 0) NOT NULL,
   title varchar(255) NOT NULL,
   author varchar(50) NOT NULL,
   genre varchar(50),
   pub_percentage numeric(3, 2) DEFAULT 0.02,
-  PRIMARY KEY (isbn),
-  FOREIGN KEY (publisher_id) REFERENCES publisher (id)
+  PRIMARY KEY (isbn)
 );
 CREATE TABLE published (
   isbn numeric(13, 0) NOT NULL,
