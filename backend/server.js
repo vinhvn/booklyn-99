@@ -39,7 +39,7 @@ function queryGenerator(table, params) {
     if (keys.length != 0) { query += " WHERE " } // add if query parameters
 
     for (let i = 0; i < keys.length; i++) { // loop through params and add them
-        query += "UPPER(" + keys[i] + ") LIKE UPPER(\'%" + values[i] + "%\') AND "
+        query += "UPPER(" + keys[i] + ") LIKE UPPER(\'%" + encodeURIComponent(values[i]) + "%\') AND "
     }
 
     if (keys.length != 0) { query = query.substring(0, query.length - 4) } // remove the additional AND
@@ -116,13 +116,23 @@ app.post('/register', (req, res) => {
     client.query(query_address, (error, results) => {
        // if(error) {}
         //client.end()
+        client.query(query_user, (error, results) => {
+            if(error) {
+                res.status(400).send()
+            } else {
+                res.status(200).send()
+            }
+            //client.end()
+        })
     })
-    client.query(query_user, (error, results) => {
-        if(error) {
-            res.status(400).send()
-        } else {
-            res.status(200).send()
-        }
+})
+
+app.post('/book', (req, res) => {
+    let query_book = `INSERT INTO book (isbn, title, author, genre) VALUES('${req.body.isbn}', '${req.body.title}', '${req.body.author}'. '${req.body.genre}')`
+    //let query_published = `INSERT INTO published VALUES('${req.body.isbn}')`
+    client.query(query_book, (error, results) => {
+        //if(error) {throw error}
+        res.status(200).send()
         //client.end()
     })
 })
