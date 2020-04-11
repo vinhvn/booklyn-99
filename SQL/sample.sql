@@ -1,9 +1,14 @@
 --address
 INSERT INTO address
-VALUES(1, 2939, 'Books Avenue', 'Booklyn', 'New Bork City', 'B00K')
+VALUES(1, 2939, 'Books Avenue', 'Booklyn', 'New Bork City', 'B00K');
+
+--user
+INSERT INTO "user" (username, password, email)
+VALUES('Nick', 'covid19', 'nickkerr@gmail.com');
+
 --publishers
 INSERT INTO publisher
-VALUES(1, 'Books R Us', '420', 1, 'booksrus@aol.com', '7184208008')
+VALUES(1, 'Books R Us', '420', 1, 'booksrus@aol.com', '7184208008');
 --books
 
 INSERT INTO book
@@ -25,7 +30,7 @@ INSERT INTO book
 VALUES(9781449325862, 1, 'Git Pocket Guide', 'Richard E. Silverman', 'Educational');
 
 INSERT INTO book
-VALUES(9781137279019, 1, 'Riveted: The Science of Why Jokes Make Us Laugh, Movies Make Us Cry, and Religion Makes Us Feel One with the Universe', 'Jim Davies', 'Educational');
+VALUES(9781137279019, 1, 'Riveted: The Science of Why Jokes Make Us Laugh', 'Jim Davies', 'Educational');
 
 INSERT INTO book
 VALUES(9780071841603, 1, 'ITIL Foundation All-in-One Exam Guide', 'Jim Davies', 'Educational');
