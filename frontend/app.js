@@ -34,6 +34,8 @@ app.use('/search', searchRouter);
 app.use('/books', booksRouter);
 app.use('/book', bookRouter);
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 
 // Error handler
 app.use(function (err, req, res, next) {
