@@ -19,8 +19,50 @@ router.post('/', function (req, res, next) {
         res.redirect('/');
         return;
     }
-
-    res.status(200).send();
+    let {
+        username,
+        password,
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        gender,
+        age,
+        street_number,
+        street_name,
+        city,
+        province,
+        postal_code,
+    } = req.body;
+    axios
+        .post('http://localhost:8081/register', {
+            username,
+            password,
+            first_name,
+            last_name,
+            email,
+            phone_number,
+            gender,
+            age,
+            street_number,
+            street_name,
+            city,
+            province,
+            postal_code,
+        })
+        .then(
+            (resp) => {
+                if (resp.status === 200) {
+                    res.redirect('/');
+                    return;
+                } else {
+                    next(createError(400, 'Duplicate Username'));
+                }
+            },
+            (error) => {
+                next(createError(500, 'Internal Server Error'));
+            }
+        );
 });
 
 module.exports = router;

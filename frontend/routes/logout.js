@@ -6,16 +6,24 @@ const createError = require('http-errors');
 
 router.post('/', function (req, res, next) {
     if (!req.session.loggedin) {
-        res.redirect('/');
+        next(createError(400, 'Not Logged In'));
         return;
     }
-    let uuid = req.session.id;
-    axios.post('http://localhost:8081/logout', { uuid }).then(
+    let { key } = req.session;
+    axios.post('http://localhost:8081/logout', { key }).then(
         (resp) => {
-            console.log(resp);
+            if (resp.status === 200) {
+                req.session.key = undefined;
+                req.session.loggedin = false;
+                res.redirect('/');
+                return;
+            } else {
+                next(createError(400, 'Not Logged In'));
+                return;
+            }
         },
         (error) => {
-            // console.log(error);
+            next(createError(500, 'Internal Server Error'));
         }
     );
 });
