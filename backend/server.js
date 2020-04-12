@@ -7,7 +7,7 @@ const port = 8081
 const { Client } = require('pg')
 const client = new Client({
     user: 'postgres',
-    password: 'Vincent',
+    password: '20000205',
     host: 'localhost',
     database: 'bookstore',
     port: 5432
@@ -15,6 +15,7 @@ const client = new Client({
 client.connect();
 app.use(express.json())
 let authed = []
+let authed_user = []
 
 function queryGenerator(table, params) {
 
@@ -88,6 +89,7 @@ app.post('/login', (req, res) => {
         if(valid) { // exists
             let key = uuid()
             authed.push(key)
+            authed_user.push(req.body.username)
             res.json({status:200, key: key})
             return
         }
@@ -98,11 +100,13 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
     console.log(authed)
-    console.log(req.body.authkey)
-    if(!authed.includes(req.body.authkey)) { // check if logged in
+    console.log(req.body.key)
+    if(!authed.includes(req.body.key)) { // check if logged in
         res.json({status:400})
     } else {
-        authed.splice(authed.indexOf(req.body.authkey), 1)
+        let index = authed.indexOf(req.body.key)
+        authed.splice(index, 1)
+        authed_user.splice(index, 1)
         res.json({status:200})
     }
 })
@@ -128,10 +132,11 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/book', (req, res) => {
-    let query_book = `INSERT INTO book (isbn, title, author, genre) VALUES('${req.body.isbn}', '${req.body.title}', '${req.body.author}'. '${req.body.genre}')`
+    let query_book = `INSERT INTO book (isbn, publisher_id, title, author, genre) VALUES('${req.body.isbn}', 0, '${req.body.title}', '${req.body.author}', '${req.body.genre}')`
     //let query_published = `INSERT INTO published VALUES('${req.body.isbn}')`
+    console.log(query_book)
     client.query(query_book, (error, results) => {
-        //if(error) {throw error}
+        if(error) {throw error}
         res.status(200).send()
         //client.end()
     })
@@ -151,6 +156,42 @@ app.get('/genres', (req, res) => {
     })
 })
 
+app.get('/user', (req, res) => {
+    let username = authed_user[authed.indexOf(req.query.key)]
+    let query = `SELECT * FROM \"user\" WHERE username = '${username}'`
+    console.log(query)
+    client.query(query, (error, results) => {
+       // if(error) {throw error}
+       if(results.rows != 0) {
+        res.json(results.rows)
+       } else {res.status(400).send()}
+        
+        //client.end()
+    })
+})
+
+app.delete('/book', (req, res) => {
+    let query = `DELETE FROM book WHERE isbn = '${req.body.isbn}'`
+    client.query(query, (error, results) => {
+        // if(error) {throw error}
+        res.status(200).send()
+         
+         //client.end()
+     })
+})
+
+app.get('/authorization', (req, res) => {
+    let username = authed_user[authed.indexOf(req.query.key)]
+    let query = `SELECT * FROM \"store\" WHERE username = '${username}'`
+    client.query(query, (error, results) => {
+        // if(error) {throw error}
+        if(results.rows != 0) {
+            res.json({auth: true})
+           } else {res.json({auth: false})}
+         
+         //client.end()
+     })
+})
 app.listen(port, () => {
 
 })
