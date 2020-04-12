@@ -8,7 +8,11 @@ const createError = require('http-errors');
 router.get('/', function (req, res, next) {
     axios.get('http://localhost:8081/genres').then(
         (resp) => {
-            res.status(200).render(path.join('pages', 'search'), resp.data);
+            let { genre } = resp.data;
+            res.status(200).render(path.join('pages', 'search'), {
+                genre,
+                session: req.session,
+            });
             return;
         },
         (error) => {

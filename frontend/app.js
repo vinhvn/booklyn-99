@@ -10,6 +10,8 @@ const bookRouter = require(path.join(__dirname, 'routes', 'book'));
 const registerRouter = require(path.join(__dirname, 'routes', 'register'));
 const loginRouter = require(path.join(__dirname, 'routes', 'login'));
 const logoutRouter = require(path.join(__dirname, 'routes', 'logout'));
+const accountRouter = require(path.join(__dirname, 'routes', 'account'));
+const manageRouter = require(path.join(__dirname, 'routes', 'manage'));
 
 const app = express();
 
@@ -36,6 +38,8 @@ app.use('/book', bookRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/account', accountRouter);
+app.use('/manage', manageRouter);
 
 // Error handler
 app.use(function (err, req, res, next) {

@@ -16,12 +16,42 @@ router.get('/:isbn', function (req, res, next) {
         (resp) => {
             if (Object.keys(resp.data).length === 0)
                 return next(createError(404, 'Book not found'));
-            res.render(path.join('pages', 'book'), resp.data[0]);
+            res.render(path.join('pages', 'book'), {
+                book: resp.data[0],
+                session: req.session,
+            });
         },
         (error) => {
             // console.log(error);
         }
     );
+});
+
+/* POST/book */
+router.post('/', function (req, res, next) {
+    if (!req.session.loggedin) {
+        res.redirect('/');
+        return;
+    }
+    let { isbn, title, author, genre } = req.body;
+    axios
+        .post('http://localhost:8081/book', {
+            isbn,
+            title,
+            author,
+            genre,
+        })
+        .then(
+            (resp) => {
+                if (resp.status === 200) {
+                    res.redirect(`/book/${isbn}`);
+                    return;
+                }
+            },
+            (error) => {
+                next(createError(500, 'Internal Server Error'));
+            }
+        );
 });
 
 module.exports = router;

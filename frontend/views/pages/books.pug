@@ -3,7 +3,7 @@ extends ../includes/layout
 block content
     div(class='container-fluid')
         h1 Books
-        each book in data
+        each book in books
             div(class='card')
                 div(class='card-body')
                     h5(class='card-title') #{book.title}
@@ -13,4 +13,7 @@ block content
                         | Genre: #{book.genre}
                         br
                         | ISBN: #{book.isbn}
-                    a(href=`/book/${book.isbn}` class='btn btn-primary') Learn more
+                    form(action='/book' method='delete')
+                        a(href=`/book/${book.isbn}` class='btn btn-primary btn-md') Learn more
+                        if session.loggedin
+                            button(type='submit' class='btn btn-danger btn-md' name='isbn' value=`${book.isbn}`) Remove

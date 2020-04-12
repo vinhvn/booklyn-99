@@ -13,10 +13,18 @@ div(class='container-fluid p-0')
                     a(class='nav-link' href='/books') Books
                 li(class='nav-item')
                     a(class='nav-link' href='/search') Search
-                li(class='nav-item')
-                    a(class='nav-link' href='/account') Account
-            button(type='button' class='btn btn-secondary btn-lg' data-toggle='modal' data-target='#login') Login
+                if session.loggedin
+                    li(class='nav-item')
+                        a(class='nav-link' href='/account') Account
+                    li(class='nav-item')
+                        a(class='nav-link' href='/manage') Manage
+            if session.loggedin
+                form(action='/logout' method='post')
+                    button(type='submit' class='btn btn-secondary btn-md') Logout
+            else
+                button(type='button' class='btn btn-secondary btn-md' data-toggle='modal' data-target='#login') Login
 
+// Login form
 div(class='modal fade' id='login' tabindex='-1' role='dialog' aria-labelledby='loginTitle' aria-hidden='true')
     div(class='modal-dialog modal-dialog-centered' role='document')
         div(class='modal-content')

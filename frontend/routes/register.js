@@ -10,7 +10,9 @@ router.get('/', function (req, res, next) {
         res.redirect('/');
         return;
     }
-    res.status(200).render(path.join('pages', 'register'));
+    res.status(200).render(path.join('pages', 'register'), {
+        session: req.session,
+    });
 });
 
 /* POST/register */

@@ -13,7 +13,7 @@ block content
             div(class='form-group')
                 label(for='genre') GENRE
                 select(class='form-control' id='genre' name='genre' placeholder='Genre')
-                    option
+                    option(value='') Genre
                     each opt in genre
                         option #{opt}
             div(class='form-group')
@@ -22,5 +22,5 @@ block content
             div(class='form-group')
                 label(for='isbn') ISBN
                 input(class='form-control' id='isbn' name='isbn' placeholder='1234567890123')
-                small(id="isbnHelp" class="form-text text-muted") Require all 13 digits
+                small(id="isbnHelp" class="form-text text-muted") Please enter all 13 digits.
             button(type='submit' class='btn btn-dark') Submit

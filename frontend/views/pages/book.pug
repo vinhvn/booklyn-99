@@ -5,15 +5,15 @@ block content
         h1
             span(class='badge badge-primary') Book
             |  
-            | #{title}
+            | #{book.title}
         div(class='card' style='width: 24rem;')
             img(src='/images/stock-book.jpg' class='card-img-top' alt='stock-book')
             div(class='card-body')
-                h5(class='card-title') #{title}
+                h5(class='card-title') #{book.title}
                 p(class='card-text')
-                    | Author: #{author}
+                    | Author: #{book.author}
                     br
-                    | Genre: #{genre}
+                    | Genre: #{book.genre}
                     br
-                    | ISBN: #{isbn}
-                a(href=`/book/${isbn}` class='btn btn-primary') Buy
+                    | ISBN: #{book.isbn}
+                a(href=`#` class='btn btn-primary') Buy

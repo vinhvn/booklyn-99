@@ -20,7 +20,10 @@ router.get('/', function (req, res, next) {
 
     axios(query).then(
         (resp) => {
-            res.render(path.join('pages', 'books'), resp);
+            res.render(path.join('pages', 'books'), {
+                books: resp.data,
+                session: req.session,
+            });
         },
         (error) => {
             console.log(error);

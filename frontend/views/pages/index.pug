@@ -31,6 +31,7 @@ block content
                     |  
                     a(class='btn btn-primary btn-lg' href='/search' role='button') Search
                     |  
-                    button(type='button' class='btn btn-secondary btn-lg' data-toggle='modal' data-target='#login') Login
-                    |  
-                    a(class='btn btn-secondary btn-lg' href='/register' role='button') Register
+                    unless session.loggedin
+                        button(type='button' class='btn btn-secondary btn-lg' data-toggle='modal' data-target='#login') Login
+                        |  
+                        a(class='btn btn-secondary btn-lg' href='/register' role='button') Register

@@ -1,0 +1,31 @@
+extends ../includes/layout
+
+block content
+    div(class='container-fluid')
+        h1 Manage
+        button(type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#addBook') Add a Book
+    // Login form
+    div(class='modal fade' id='addBook' tabindex='-1' role='dialog' aria-labelledby='addBookTitle' aria-hidden='true')
+        div(class='modal-dialog modal-dialog-centered' role='document')
+            div(class='modal-content')
+                div(class='modal-header')
+                    h5(class='modal-title' id='loginTitle') Add a Book
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                form(action='/book' method='post' class='needs-validation')
+                    div(class='modal-body')
+                        div(class='form-group')
+                            label(for='isbn') ISBN
+                            input(class='form-control' id='isbn' name='isbn' placeholder='1234567890123' required)
+                            small(id="isbnHelp" class="form-text text-muted") Please enter all 13 digits.
+                        div(class='form-group')
+                            label(for='title') Title
+                            input(class='form-control' id='title' name='title' placeholder='Title' required)
+                        div(class='form-group')
+                            label(for='author') Author
+                            input(class='form-control' id='author' name='author' placeholder='Author' required)
+                        div(class='form-group')
+                            label(for='genre') Genre
+                            input(class='form-control' id='genre' name='genre' placeholder='Genre' required)
+                    div(class='modal-footer')
+                        button(type='submit' class='btn btn-primary') Submit
