@@ -3,14 +3,12 @@
 An online bookstore application ("Booklyn Nine Nine"), designed and implemented for COMP 3005
 
 - [online-bookstore](#online-bookstore)
-  - [Installation](#installation)
-  - [Usage](#usage)
+  - [Getting Started](#getting-started)
   - [Features](#features)
   - [Work in Progress](#work-in-progress)
-  - [Useful Resources](#useful-resources)
   - [Project Information](#project-information)
 
-## Installation
+## Getting Started
 
 - First, clone this repo and navigate to its folder.
 
