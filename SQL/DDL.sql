@@ -5,7 +5,7 @@ Defines database, relations, and relationships in that order.
 
 */
 -- DATABASE
-CREATE DATABASE `bookstore` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- CREATE DATABASE `bookstore` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 /*
 
 ------------------------------------------------------------- RELATIONS
@@ -40,10 +40,10 @@ CREATE TABLE book (
   genre varchar(50),
   PRIMARY KEY (isbn)
 );
--- RELATION: "order"
+-- RELATION: order
 CREATE TABLE "order" (
   id numeric(8, 0) NOT NULL,
-  date timestamp,
+  "date" timestamp,
   tracking_number varchar(24),
   shipping_company varchar(50),
   billing_address numeric(5, 0),
@@ -53,7 +53,7 @@ CREATE TABLE "order" (
   FOREIGN KEY (billing_address) REFERENCES address (id),
   FOREIGN KEY (shipping_address) REFERENCES address (id)
 );
--- RELATION: "user"
+-- RELATION: user
 CREATE TABLE "user" (
   username varchar(30),
   password varchar(30) NOT NULL,
