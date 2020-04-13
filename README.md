@@ -1,24 +1,48 @@
 # online-bookstore
 
-An online bookstore application ("LookInnaBook"), designed and implemented for COMP 3005
+An online bookstore application ("Booklyn Nine Nine"), designed and implemented for COMP 3005
 
 - [online-bookstore](#online-bookstore)
-  - [Installation](#installation)
-  - [Usage](#usage)
+  - [Getting Started](#getting-started)
   - [Features](#features)
   - [Work in Progress](#work-in-progress)
-  - [Useful Resources](#useful-resources)
   - [Project Information](#project-information)
 
-## Installation
+## Getting Started
 
-## Usage
+- First, clone this repo and navigate to its folder.
+
+### Backend
+
+- Navigate into the `backend` folder and then run this command:
+
+```bash
+npm start
+# alternatively
+yarn start
+```
+
+- By default, this is hosted on `http://localhost:8081`
+
+### Frontend
+
+- Navigate into the `frontend` folder and then run this command:
+
+```bash
+npm start
+# alternatively
+yarn start
+```
+
+- By default, this is hosted on `http://localhost:8080`
 
 ## Features
 
+- Book catalog w/ search functionality
+
 ## Work in Progress
 
-## Useful Resources
+- Cart system
 
 ## Project Information
 
