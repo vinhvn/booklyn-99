@@ -4,6 +4,8 @@ An online bookstore application ("Booklyn Nine Nine"), designed and implemented 
 
 - [online-bookstore](#online-bookstore)
   - [Getting Started](#getting-started)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
   - [Features](#features)
   - [Work in Progress](#work-in-progress)
   - [Project Information](#project-information)
@@ -39,6 +41,8 @@ yarn start
 ## Features
 
 - Book catalog w/ search functionality
+- Accounts
+- Small management system
 
 ## Work in Progress
 
@@ -49,3 +53,5 @@ yarn start
 - [COMP 3005 Project Specifications](resources/Project_COMP_3005_W20.pdf)
 - [Project Report](resources/report/)
 - [ER Diagram](resources/er-diagram_current.png)
+- [Schema Diagram](resources/schema-diagram_current.png)
+- [UI Screenshots](resources/ui_screenshots/ui_screenshots.pdf)
