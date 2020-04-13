@@ -132,7 +132,7 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/book', (req, res) => {
-    let query_book = `INSERT INTO book (isbn, publisher_id, title, author, genre) VALUES('${req.body.isbn}', 0, '${req.body.title}', '${req.body.author}', '${req.body.genre}')`
+    let query_book = `INSERT INTO book (isbn, title, author, genre) VALUES('${req.body.isbn}', '${req.body.title}', '${req.body.author}', '${req.body.genre}')`
     //let query_published = `INSERT INTO published VALUES('${req.body.isbn}')`
     console.log(query_book)
     client.query(query_book, (error, results) => {
