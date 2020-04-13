@@ -36,9 +36,9 @@ yarn start
 
 - By default, this is hosted on `http://localhost:8080`
 
-## Usage
-
 ## Features
+
+- Book catalog w/ search functionality
 
 ## Work in Progress
 
