@@ -51,7 +51,7 @@ yarn start
 ## Project Information
 
 - [COMP 3005 Project Specifications](resources/Project_COMP_3005_W20.pdf)
-- [Project Report](resources/report/)
+- [Project Report](resources/report/project_report.pdf)
 - [ER Diagram](resources/er-diagram_current.png)
 - [Schema Diagram](resources/schema-diagram_current.png)
 - [UI Screenshots](resources/ui_screenshots/ui_screenshots.pdf)
