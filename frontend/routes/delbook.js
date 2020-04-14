@@ -10,7 +10,6 @@ router.post('/', function (req, res, next) {
         return;
     }
     let { isbn } = req.body;
-    console.log({ isbn });
     axios.delete(`http://localhost:8081/book`, { data: { isbn } }).then(
         (resp) => {
             res.redirect('/books');
