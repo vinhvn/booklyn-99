@@ -203,6 +203,28 @@ app.get('/authorization', (req, res) => {
          //client.end()
      })
 })
+
+app.post('/publisher', (req, res) => {
+    let address_id = Math.floor(Math.random() * 99999);
+    let publisher_id = Math.floor(Math.random() * 99999);
+    let query_address = `INSERT INTO \"address\" VALUES('${address_id}', '${req.body.street_number}', '${req.body.street_name}', '${req.body.city}', '${req.body.province}', '${req.body.postal_code}')`
+    let query_publisher = `INSERT INTO \"publisher\" VALUES('${publisher_id}', '${req.body.publisher_name}', '${req.body.banking_account}', '${address_id}', '${req.body.email}', '${req.body.phone_number}')` 
+    console.log(query_publisher)
+    console.log(query_address)
+    client.query(query_address, (error, results) => {
+       // if(error) {}
+        //client.end()
+        client.query(query_publisher, (error, results) => {
+            if(error) {
+                res.status(400).send()
+            } else {
+                res.status(200).send()
+            }
+            //client.end()
+        })
+    })
+})
+
 app.listen(port, () => {
 
 })
