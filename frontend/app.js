@@ -12,6 +12,8 @@ const loginRouter = require(path.join(__dirname, 'routes', 'login'));
 const logoutRouter = require(path.join(__dirname, 'routes', 'logout'));
 const accountRouter = require(path.join(__dirname, 'routes', 'account'));
 const manageRouter = require(path.join(__dirname, 'routes', 'manage'));
+const delbookRouter = require(path.join(__dirname, 'routes', 'delbook'));
+const publisherRouter = require(path.join(__dirname, 'routes', 'publisher'));
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/account', accountRouter);
 app.use('/manage', manageRouter);
+app.use('/delbook', delbookRouter);
+app.use('/publisher', publisherRouter);
 
 // Error handler
 app.use(function (err, req, res, next) {

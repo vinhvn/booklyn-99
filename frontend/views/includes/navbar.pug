@@ -15,9 +15,10 @@ div(class='container-fluid p-0')
                     a(class='nav-link' href='/search') Search
                 if session.loggedin
                     li(class='nav-item')
-                        a(class='nav-link' href='/account') Account
-                    li(class='nav-item')
-                        a(class='nav-link' href='/manage') Manage
+                        a(class='nav-link' href=`/account/${session.key}`) Account
+                    if session.auth
+                        li(class='nav-item')
+                            a(class='nav-link' href='/manage') Manage
             if session.loggedin
                 form(action='/logout' method='post')
                     button(type='submit' class='btn btn-secondary btn-md') Logout

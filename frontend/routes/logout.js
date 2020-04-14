@@ -15,6 +15,7 @@ router.post('/', function (req, res, next) {
             if (resp.status === 200) {
                 req.session.key = undefined;
                 req.session.loggedin = false;
+                req.session.auth = undefined;
                 res.redirect('/');
                 return;
             } else {

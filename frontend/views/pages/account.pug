@@ -1,3 +1,35 @@
 extends ../includes/layout
 
 block content
+    div(class='container-fluid')
+        h1
+            if session.auth
+                span(class='badge badge-danger') Manager
+                |  
+                | #{user.username}
+            else
+                span(class='badge badge-primary') Account
+                |  
+                | #{user.username}
+        div(class='card')
+            div(class='card-body')
+                h4(class='card-text')
+                    strong Name:
+                    |  
+                    | #{user.first_name} #{user.last_name}
+                    br
+                    strong Email:
+                    |  
+                    | #{user.email}
+                    br
+                    strong Phone Number:
+                    |  
+                    | #{user.phone_number}
+                    br
+                    strong Gender:
+                    |  
+                    | #{user.gender}
+                    br
+                    strong Age:
+                    |  
+                    | #{user.age}

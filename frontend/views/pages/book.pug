@@ -16,4 +16,7 @@ block content
                     | Genre: #{book.genre}
                     br
                     | ISBN: #{book.isbn}
-                a(href=`#` class='btn btn-primary') Buy
+                form(action='/delbook' method='post')
+                    a(href=`#` class='btn btn-primary') Buy
+                    if session.auth
+                        button(type='submit' class='btn btn-danger btn-md' name='isbn' value=`${book.isbn}`) Remove

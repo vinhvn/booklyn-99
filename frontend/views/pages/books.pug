@@ -13,7 +13,7 @@ block content
                         | Genre: #{book.genre}
                         br
                         | ISBN: #{book.isbn}
-                    form(action='/book' method='delete')
+                    form(action='/delbook' method='post')
                         a(href=`/book/${book.isbn}` class='btn btn-primary btn-md') Learn more
-                        if session.loggedin
+                        if session.auth
                             button(type='submit' class='btn btn-danger btn-md' name='isbn' value=`${book.isbn}`) Remove

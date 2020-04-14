@@ -16,11 +16,18 @@ router.post('/', function (req, res, next) {
                 let { key } = resp.data;
                 req.session.loggedin = true;
                 req.session.key = key;
-                res.redirect(`/account/${key}`);
-                return;
+                axios.post(`http://localhost:8081/authorization`, { key }).then(
+                    (response) => {
+                        req.session.auth = response.data.auth;
+                        res.redirect(`/account/${key}`);
+                        return;
+                    },
+                    (err) => {
+                        next(createError(500, 'Internal Server Error'));
+                    }
+                );
             } else {
                 next(createError(400, 'Incorrect Credentials'));
-                return;
             }
         },
         (error) => {
