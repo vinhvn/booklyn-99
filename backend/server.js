@@ -7,9 +7,9 @@ const port = 8081
 const { Client } = require('pg')
 const client = new Client({
     user: 'postgres',
-    password: '20000205',
+    password: 'XXX',
     host: 'localhost',
-    database: 'bookstore',
+    database: 'boksatar',
     port: 5432
 })
 client.connect();
@@ -171,10 +171,21 @@ app.get('/user', (req, res) => {
 })
 
 app.delete('/book', (req, res) => {
-    let query = `DELETE FROM book WHERE isbn = '${req.body.isbn}'`
-    client.query(query, (error, results) => {
-        // if(error) {throw error}
-        res.status(200).send()
+    let query_book = `DELETE FROM book WHERE isbn = '${req.body.isbn}'`
+    let query_published = `DELETE FROM published WHERE isbn = '${req.body.isbn}'`
+    let query_store_books = `DELETE FROM published WHERE isbn = '${req.body.isbn}'`
+    console.log(query_published)
+    console.log(query_book)
+    client.query(query_store_books, (error, results) => {
+        client.query(query_published, (error, results) => {
+            // if(error) {throw error}
+            client.query(query_book, (error, results) => {
+                // if(error) {throw error}
+                res.status(200).send()
+                 //clie/nt.end()
+             })
+             //client.end()
+         })
          
          //client.end()
      })
