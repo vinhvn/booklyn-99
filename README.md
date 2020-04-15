@@ -12,7 +12,8 @@ An online bookstore application ("Booklyn Nine Nine"), designed and implemented 
 
 ## Getting Started
 
-- First, clone this repo and navigate to its respective folders.
+- Clone this repository and make sure to install [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) if you haven't.
+- Navigate to the respective folders in a terminal.
 
 ### Backend
 
