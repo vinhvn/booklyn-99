@@ -12,11 +12,20 @@ An online bookstore application ("Booklyn Nine Nine"), designed and implemented 
 
 ## Getting Started
 
-- First, clone this repo and navigate to its folder.
+- First, clone this repo and navigate to its respective folders.
 
 ### Backend
 
-- Navigate into the `backend` folder and then run this command:
+- Navigate into the `backend` folder.
+- Install dependencies using the following command:
+
+```bash
+npm install
+# alternatively
+yarn
+```
+
+- Start the server by using the following command:
 
 ```bash
 npm start
@@ -28,7 +37,16 @@ yarn start
 
 ### Frontend
 
-- Navigate into the `frontend` folder and then run this command:
+- Navigate into the `frontend` folder.
+- Install dependencies using the following command:
+
+```bash
+npm install
+# alternatively
+yarn
+```
+
+- Start the server by using the following command:
 
 ```bash
 npm start
@@ -40,13 +58,17 @@ yarn start
 
 ## Features
 
+- Backend API system to allow for other services to make requests
 - Book catalog w/ search functionality
-- Accounts
-- Small management system
+- Search has partial matching
+- Private account pages
+- Small management system (adding/removing books, publishers)
+- Different frontend interfaces based on authentication level
 
 ## Work in Progress
 
 - Cart system
+- Order system
 
 ## Project Information
 
