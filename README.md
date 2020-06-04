@@ -77,4 +77,4 @@ yarn start
 - [Project Report](resources/report/project_report.pdf)
 - [ER Diagram](resources/er-diagram_current.png)
 - [Schema Diagram](resources/schema-diagram_current.png)
-- [UI Screenshots](resources/ui_screenshots/ui_screenshots.pdf)
+- [UI Screenshots](resources/ui_screenshots/3005UISCREENSHOTS.pdf)
